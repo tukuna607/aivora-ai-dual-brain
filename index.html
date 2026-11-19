@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080817">
+<title>Aivora AI - Dual Brain</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+ background:#080817;
+ color:#fff;
+ font-family:Arial,sans-serif;
+ min-height:100vh;
+}
+header{
+ height:65px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ padding:0 17px;
+ border-bottom:1px solid #292744;
+ background:#0d0c20;
+}
+.logo{font-size:21px;font-weight:bold;color:#b99aff}
+.logo span{color:#63c9ff}
+.menu{
+ border:1px solid #383254;
+ background:#19172e;
+ color:white;padding:9px 13px;
+ border-radius:10px;font-size:20px;
+}
+main{max-width:750px;margin:auto;padding:22px 16px}
+.status{text-align:center;color:#aaa;font-size:12px;letter-spacing:2px}
+h1{
+ text-align:center;font-size:32px;
+ margin-top:12px;
+ background:linear-gradient(90deg,#b17aff,#63d4ff);
+ -webkit-background-clip:text;
+ color:transparent;
+}
+.subtitle{text-align:center;color:#aaa;margin-top:9px;font-size:13px}
+.brain{
+ width:185px;height:185px;
+ border-radius:50%;
+ margin:28px auto 20px;
+ display:flex;align-items:center;justify-content:center;
+ background:radial-gradient(circle,#47317e 0%,#17143c 45%,#09091b 75%);
+ border:2px solid #8761ee;
+ box-shadow:0 0 25px #7550ff,0 0 65px #3429a5;
+ animation:glow 3s infinite alternate;
+}
+.brain span{font-size:76px}
+@keyframes glow{
+ from{box-shadow:0 0 20px #7550ff}
+ to{box-shadow:0 0 45px #7550ff,0 0 90px #3224a8}
+}
+.selector{
+ display:flex;gap:10px;
+ justify-content:center;margin:20px 0;
+}
+.mode{
+ flex:1;max-width:165px;
+ padding:13px 8px;
+ border-radius:12px;
+ border:1px solid #393451;
+ background:#15142b;color:#aaa;
+ font-weight:bold;
+}
+.mode.active{
+ color:white;border-color:#a47aff;
+ background:#29204c;
+ box-shadow:0 0 14px #6744ad55;
+}
+.mode small{display:block;font-weight:normal;margin-top:5px}
+.card{
+ background:#111126;
+ border:1px solid #302b50;
+ border-radius:16px;
+ padding:16px;margin-top:18px;
+}
+.card-title{font-size:16px;font-weight:bold;color:#c6a8ff}
+.welcome{
+ color:#b8b5ca;
+ font-size:14px;line-height:1.6;
+ margin-top:12px;
+}
+.chat{
+ height:210px;
+ overflow-y:auto;
+ margin-top:14px;
+ display:flex;flex-direction:column;gap:12px;
+}
+.message{
+ padding:11px 13px;
+ border-radius:13px;
+ font-size:14px;line-height:1.5;
+ max-width:88%;
+}
+.bot{background:#242044;align-self:flex-start}
+.user{background:#31306b;align-self:flex-end}
+.input-area{
+ display:flex;gap:8px;margin-top:13px;
+}
+.input-area input{
+ flex:1;min-width:0;
+ padding:14px;
+ border-radius:12px;
+ border:1px solid #393451;
+ background:#09091a;color:white;
+ outline:none;font-size:14px;
+}
+.send{
+ padding:0 18px;border:0;border-radius:12px;
+ background:linear-gradient(120deg,#8752ed,#398bea);
+ color:white;font-size:20px;
+}
+.tools{
+ display:grid;grid-template-columns:repeat(3,1fr);
+ gap:10px;margin-top:18px;
+}
+.tool{
+ text-align:center;padding:14px 5px;
+ border:1px solid #302b50;
+ background:#14132b;border-radius:12px;
+ color:#ddd;font-size:12px;
+}
+.tool b{display:block;font-size:21px;margin-bottom:7px}
+footer{text-align:center;color:#777;font-size:11px;padding:30px 10px}
+button{cursor:pointer}
+@media(max-width:380px){
+ h1{font-size:27px}
+ .brain{width:155px;height:155px}
+ .brain span{font-size:65px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+ <div class="logo">AIVORA <span>AI</span></div>
+ <button class="menu" onclick="alert('Aivora AI Menu')">☰</button>
+</header>
+
+<main>
+ <div class="status">✦ NEXT GENERATION INTELLIGENCE ✦</div>
+
+ <h1>AIVORA NEURAL</h1>
+ <p class="subtitle">Your Own Independent AI Brain</p>
+
+ <div class="brain">
+  <span>🧠</span>
+ </div>
+
+ <p style="text-align:center;color:#aaa;font-size:13px">
+  Dual Brain Intelligence System
+ </p>
+
+ <div class="selector">
+  <button class="mode active" id="online" onclick="selectMode('online')">
+   ☁ ONLINE
+   <small>Cloud AI</small>
+  </button>
+  <button class="mode" id="offline" onclick="selectMode('offline')">
+   ◈ OFFLINE
+   <small>Local AI</small>
+  </button>
+ </div>
+
+ <section class="card">
+  <div class="card-title">✦ Aivora AI Assistant</div>
+  <p class="welcome">
+   Hello! Welcome to Aivora AI.
+   Your independent AI journey starts here.
+   <br><br>
+   Ask me anything and explore the future of AI.
+  </p>
+
+  <div class="chat" id="chat">
+   <div class="message bot">
+    Hello! I am Aivora AI. How can I help you today?
+   </div>
+  </div>
+
+  <div class="input-area">
+   <input id="msg" placeholder="Message Aivora AI..."
+    onkeydown="if(event.key==='Enter')sendMessage()">
+   <button class="send" onclick="sendMessage()">➤</button>
+  </div>
+ </section>
+
+ <div class="tools">
+  <div class="tool"><b>🎙️</b>Voice AI</div>
+  <div class="tool"><b>📷</b>Photo AI</div>
+  <div class="tool"><b>📄</b>File AI</div>
+  <div class="tool"><b>🌐</b>Languages</div>
+  <div class="tool"><b>🧠</b>AI Memory</div>
+  <div class="tool"><b>⚙️</b>Settings</div>
+ </div>
+
+ <footer>
+  AIVORA AI · POWERED BY AIVORA-NEURAL<br><br>
+  Independent Intelligence • Online + Offline<br>
+  © 2026 Aivora AI
+ </footer>
+</main>
+
+<script>
+let currentMode='online';
+
+function selectMode(mode){
+ currentMode=mode;
+ document.getElementById('online').classList.toggle('active',mode==='online');
+ document.getElementById('offline').classList.toggle('active',mode==='offline');
+}
+
+function sendMessage(){
+ const input=document.getElementById('msg');
+ const text=input.value.trim();
+ if(!text)return;
+
+ const chat=document.getElementById('chat');
+
+ const user=document.createElement('div');
+ user.className='message user';
+ user.textContent=text;
+ chat.appendChild(user);
+
+ const reply=document.createElement('div');
+ reply.className='message bot';
+
+ if(currentMode==='online'){
+  reply.textContent='Online AI server abhi connect nahi hua hai. Aivora Neural online brain development mein hai.';
+ }else{
+  reply.textContent='Offline AI model abhi install nahi hua hai. Aivora Neural local brain development mein hai.';
+ }
+
+ chat.appendChild(reply);
+ input.value='';
+ chat.scrollTop=chat.scrollHeight;
+}
+</script>
+
+</body>
+</html>
